@@ -20,7 +20,6 @@ bool hidden = false;
 
 void setup(){
   Serial.begin(74880);
-  LittleFS.begin();
   
   // set buzzer & led
   pinMode(buzPin, OUTPUT);
@@ -40,10 +39,16 @@ void setup(){
   digitalWrite(RIGHT_GAS, 0);
   digitalWrite(LEFT_GAS, 0);
 
-  // setup AP
+  // Setup WiFi AP
   WiFi.mode(WIFI_AP);
   WiFi.softAP(ssid, password, channel, hidden, max_connections);
   Serial.println("AP IP address: "+ WiFi.softAPIP().toString());
+
+  // Mount LittleFS
+  if (!LittleFS.begin()) {
+    Serial.println("LittleFS mount failed");
+    return;
+  }
 
   // Configuring static pages from LittleFS
   server.serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
@@ -79,55 +84,11 @@ void Throttle(int gas) {
   digitalWrite(LEFT_GAS, gas);
 }
 
-// function to move forward
-void Forward(){ 
-  digitalWrite(RIGHT_DIR, FORWARD);
-  digitalWrite(LEFT_DIR, FORWARD);
-  Throttle(ON);
-}
-
-// function to move backward
-void Backward(){
-  digitalWrite(RIGHT_DIR, BACKWARD);
-  digitalWrite(LEFT_DIR, BACKWARD);
-  Throttle(ON);
-}
-
-// function to turn right
-void TurnRight(){
-  digitalWrite(RIGHT_DIR, BACKWARD);
-  digitalWrite(LEFT_DIR, FORWARD);
-  Throttle(ON);
-}
-
-// function to turn left
-void TurnLeft(){
-  digitalWrite(RIGHT_DIR, FORWARD);
-  digitalWrite(LEFT_DIR, BACKWARD);
-  Throttle(ON);
-}
-
-// function to stop motors
-void Stop(){  
-  digitalWrite(RIGHT_DIR, FORWARD);
-  digitalWrite(LEFT_DIR, FORWARD);
-  Throttle(OFF);
-}
-
-// function to beep a buzzer
-void BeepHorn(){
-  digitalWrite(buzPin, HIGH);
-  delay(150);
-  digitalWrite(buzPin, LOW);
-  delay(80);
-}
-
-// function to turn on LED
-void TurnLightOn(){
-  digitalWrite(ledPin, HIGH);
-}
-
-// function to turn off LED
-void TurnLightOff(){
-  digitalWrite(ledPin, LOW);
-}
+void Forward(){ digitalWrite(RIGHT_DIR, FORWARD); digitalWrite(LEFT_DIR, FORWARD); Throttle(ON); }
+void Backward(){ digitalWrite(RIGHT_DIR, BACKWARD); digitalWrite(LEFT_DIR, BACKWARD); Throttle(ON); }
+void TurnRight(){ digitalWrite(RIGHT_DIR, BACKWARD); digitalWrite(LEFT_DIR, FORWARD); Throttle(ON); }
+void TurnLeft(){ digitalWrite(RIGHT_DIR, FORWARD); digitalWrite(LEFT_DIR, BACKWARD); Throttle(ON); }
+void Stop(){ Throttle(OFF); }
+void BeepHorn(){ digitalWrite(buzPin, HIGH); delay(150); digitalWrite(buzPin, LOW); }
+void TurnLightOn(){ digitalWrite(ledPin, HIGH); }
+void TurnLightOff(){ digitalWrite(ledPin, LOW); }
