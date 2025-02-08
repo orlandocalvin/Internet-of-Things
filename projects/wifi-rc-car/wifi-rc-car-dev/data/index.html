@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP8266 RC Car</title>
+</head>
+
+<body>
+    <h1>ESP8266 RC Car Controller</h1>
+
+    <button onclick="sendCommand('F')">Forward</button>
+    <button onclick="sendCommand('B')">Backward</button>
+    <button onclick="sendCommand('L')">Left</button>
+    <button onclick="sendCommand('R')">Right</button>
+    <button onclick="sendCommand('S')">Stop</button>
+    <button onclick="sendCommand('V')">Beep Horn</button>
+    <button onclick="sendCommand('W')">Turn Light On</button>
+    <button onclick="sendCommand('w')">Turn Light Off</button>
+
+    <p id="status">Status: Waiting for command...</p>
+
+    <script>
+        async function sendCommand(cmd) {
+            try {
+                let response = await fetch(`/command?State=${cmd}`);
+                if (response.ok) {
+                    document.getElementById("status").innerText = `Command sent: ${cmd}`;
+                } else {
+                    document.getElementById("status").innerText = "Error sending command";
+                }
+            } catch (error) {
+                document.getElementById("status").innerText = "Connection error";
+            }
+        }
+    </script>
+</body>
+
+</html>

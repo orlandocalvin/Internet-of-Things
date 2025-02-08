@@ -1,5 +1,6 @@
 #include <ESP8266WiFi.h>
 #include <ESPAsyncWebServer.h>
+#include <LittleFS.h>
 
 // connections & values for drive Motors
 const int RIGHT_GAS = D1, LEFT_GAS = D2, RIGHT_DIR = D3, LEFT_DIR = D4;
@@ -18,11 +19,12 @@ const int channel = 6, max_connections = 1;
 bool hidden = false;
 
 void setup(){
-  Serial.begin(115200);    
+  Serial.begin(74880);
+  LittleFS.begin();
   
   // set buzzer & led
-  pinMode(buzPin, OUTPUT);      
-  pinMode(ledPin, OUTPUT);      
+  pinMode(buzPin, OUTPUT);
+  pinMode(ledPin, OUTPUT);
   digitalWrite(buzPin, LOW);
   digitalWrite(ledPin, LOW);
     
@@ -42,9 +44,11 @@ void setup(){
   WiFi.mode(WIFI_AP);
   WiFi.softAP(ssid, password, channel, hidden, max_connections);
   Serial.println("AP IP address: "+ WiFi.softAPIP().toString());
-  delay(3000);
 
-  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
+  // Configuring static pages from LittleFS
+  server.serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
+
+  server.on("/command", HTTP_GET, [](AsyncWebServerRequest *request){
     if (request->hasParam("State")) {
       command = request->getParam("State")->value();
 
@@ -56,9 +60,10 @@ void setup(){
       else if (command == "V") BeepHorn();
       else if (command == "W") TurnLightOn();
       else if (command == "w") TurnLightOff();
-      request->send(200, "text/plain", "Req Parameter: /State="+ command);
+
+      request->send(200, "text/plain", "OK");
     } else {
-      request->send(200, "text/plain", "Hello from ESP8266 Async Server");
+      request->send(400, "text/plain", "Missing parameter");
     }
   });
 
