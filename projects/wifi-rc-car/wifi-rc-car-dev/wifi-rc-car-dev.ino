@@ -1,5 +1,5 @@
-#include <ESP8266WiFi.h> 
-#include <ESP8266WebServer.h> 
+#include <ESP8266WiFi.h>
+#include <ESPAsyncWebServer.h>
 
 // connections & values for drive Motors
 const int RIGHT_GAS = D1, LEFT_GAS = D2, RIGHT_DIR = D3, LEFT_DIR = D4;
@@ -9,7 +9,7 @@ const int buzPin = D5;
 const int ledPin = D8;
 
 String command;
-ESP8266WebServer server(80);
+AsyncWebServer server(80);
 
 // set AP variable
 const char* ssid = "REDACTED";
@@ -43,37 +43,30 @@ void setup(){
   WiFi.softAP(ssid, password, channel, hidden, max_connections);
   Serial.println("AP IP address: "+ WiFi.softAPIP().toString());
   delay(3000);
-  
-  // setup webserver
-  server.on("/", HTTP_handleRoot);       
-  server.onNotFound(HTTP_handleRoot);    
-  server.begin();                         
+
+  server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
+    if (request->hasParam("State")) {
+      command = request->getParam("State")->value();
+
+      if (command == "F") Forward();
+      else if (command == "B") Backward();
+      else if (command == "R") TurnRight();
+      else if (command == "L") TurnLeft();
+      else if (command == "S") Stop();
+      else if (command == "V") BeepHorn();
+      else if (command == "W") TurnLightOn();
+      else if (command == "w") TurnLightOff();
+      request->send(200, "text/plain", "Req Parameter: /State="+ command);
+    } else {
+      request->send(200, "text/plain", "Hello from ESP8266 Async Server");
+    }
+  });
+
+  server.begin();
 }
 
 void loop() {
-  server.handleClient();
-
-  command = server.arg("State");          
-  if (command == "F") Forward();          
-  else if (command == "B") Backward();
-  else if (command == "R") TurnRight();
-  else if (command == "L") TurnLeft();
-  else if (command == "S") Stop();
-  else if (command == "V") BeepHorn();
-  else if (command == "W") TurnLightOn();
-  else if (command == "w") TurnLightOff();
-}
-
-void HTTP_handleRoot(void){
-  server.send(200, "text/html", "");       
-  
-  if(server.hasArg("State")){
-     Serial.println(server.arg("State"));
-  }
-}
-
-void handleNotFound(){
-  server.send(404, "text/plain", "404: Not found"); 
+  // kosong?
 }
 
 void Throttle(int gas) {
