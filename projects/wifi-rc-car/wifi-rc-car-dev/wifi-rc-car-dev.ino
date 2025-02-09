@@ -15,7 +15,7 @@ AsyncWebServer server(80);
 // set AP variable
 const char* ssid = "REDACTED";
 const char* password = "REDACTED";
-const int channel = 6, max_connections = 1;
+const int channel = 6, max_connections = 2;
 bool hidden = false;
 
 void setup(){
