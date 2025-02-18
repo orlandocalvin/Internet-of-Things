@@ -11,14 +11,14 @@ char incomingPacket[256];
 
 void setup() {
   Serial.begin(74880);
-  WiFi.begin(ssid, password);
 
+  WiFi.begin(ssid, password);
+  Serial.print("Connecting to Wifi");
   while (WiFi.status() != WL_CONNECTED) {
     Serial.print(".");
     delay(500);
   }
-
-  Serial.println("\nConnected to WiFi");
+  Serial.println(" Connected to WiFi!");
 
   udp.begin(udpPort);
 }
