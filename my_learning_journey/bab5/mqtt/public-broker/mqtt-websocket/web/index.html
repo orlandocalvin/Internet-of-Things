@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP32 LED Control</title>
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: beige;
+        }
+
+        #status {
+            font-size: 22px;
+            margin-top: -10px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        button {
+            width: 10ch;
+            padding: .75rem 0;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: .25rem;
+            border: none;
+            border-radius: .25rem;
+            display: inline-block
+        }
+
+        .on {
+            background-color: green;
+            color: white;
+        }
+
+        .off {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>ESP32 LED Control</h1>
+    <div id="status">Press Button</div>
+    <div class="btn">
+        <button class="on" onclick="sendCommand('ON')">Turn ON</button>
+        <button class="off" onclick="sendCommand('OFF')">Turn OFF</button>
+    </div>
+
+    <script>
+        const client = mqtt.connect('wss://broker.hivemq.com:8884/mqtt')
+        const pubTopic = 'orca/ctrl/topic'
+        const subTopic = 'orca/log/topic'
+
+        // Connect MQTT broker
+        client.on('connect', () => {
+            console.log('Connected to MQTT Broker!')
+            client.subscribe(subTopic, { qos: 1 }, (err) => {
+                if (!err) console.log('Subscribed to topic:', subTopic)
+            })
+        })
+
+        // Handle Message
+        client.on('message', (topic, message) => {
+            if (topic === subTopic) {
+                document.querySelector('#status').innerText = message.toString()
+            }
+        })
+
+        // Handle Error
+        client.on('error', (err) => {
+            console.error('MQTT Error:', err)
+        })
+
+        // Handle Command
+        function sendCommand(command) {
+            client.publish(pubTopic, command, { qos: 1 })
+            console.log('Command sent:', command)
+        }
+    </script>
+
+</body>
+
+</html>

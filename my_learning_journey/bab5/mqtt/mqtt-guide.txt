@@ -1,0 +1,11 @@
+# WebSocket
+const client = mqtt.connect('wss://broker.hivemq.com:8884/mqtt')
+const client = mqtt.connect('wss://test.mosquitto.org:8081/mqtt')
+
+# Port Public Broker
+broker.hivemq.com; port = 1883
+test.mosquitto.org; port = 1883
+
+# Library ESP32
+public broker ==> AsyncMqttClient.h
+hivemq cloud ==> PubSubClient.h
