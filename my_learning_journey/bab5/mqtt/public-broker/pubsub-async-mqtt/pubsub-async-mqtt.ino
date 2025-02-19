@@ -1,6 +1,7 @@
 #include <WiFi.h>
 #include <AsyncMqttClient.h>
 
+#define LED_PIN 4
 #define WIFI_SSID "REDACTED"
 #define WIFI_PASSWORD "REDACTED"
 
@@ -8,23 +9,14 @@
 #define MQTT_HOST "broker.hivemq.com"
 // #define MQTT_HOST "test.mosquitto.org"
 #define MQTT_PORT 1883
-#define MQTT_TOPIC "orca/test"
+#define MQTT_PUB_TOPIC "orca/pub/test"
+#define MQTT_SUB_TOPIC "orca/sub/test"
 
 AsyncMqttClient mqttClient;
 
-// void WiFiEvent(WiFiEvent_t event) {
-//   if (event == ARDUINO_EVENT_WIFI_STA_GOT_IP) {
-//     Serial.print("WiFi connected! Connecting to MQTT... ");
-//     mqttClient.connect();  // Connect to MQTT server
-//   } else if (event == ARDUINO_EVENT_WIFI_STA_DISCONNECTED) {
-//     Serial.println("WiFi lost, reconnecting...");
-//     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);  // Reconnect to Wi-Fi
-//   }
-// }
-
 void WiFiEvent(WiFiEvent_t event) {
   switch(event) {
-    case ARDUINO_EVENT_WIFI_STA_GOT_IP
+    case ARDUINO_EVENT_WIFI_STA_GOT_IP:
       Serial.print("WiFi connected! Connecting to MQTT... ");
       mqttClient.connect();  // Connect to MQTT server
       break;
@@ -37,20 +29,36 @@ void WiFiEvent(WiFiEvent_t event) {
 
 void onMqttConnect(bool sessionPresent) {
   Serial.println("Connected to MQTT!");
-  mqttClient.subscribe(MQTT_TOPIC, 0);  // Subscribe to MQTT topic
+  mqttClient.subscribe(MQTT_SUB_TOPIC, 0);  // Subscribe to MQTT topic
 }
 
 void onMqttMessage(char* topic, char* payload, AsyncMqttClientMessageProperties properties, size_t len, size_t index, size_t total) {
   Serial.println("Message received on topic: " + String(topic));
-  Serial.print("Message: ");
+
+  // Received Message
+  String message = "";
   for (size_t i = 0; i < len; i++) {
-    Serial.print((char)payload[i]);  // Print received message
+    message += (char)payload[i];
   }
-  Serial.println();
+  message.trim();
+  message.toUpperCase();
+  Serial.println("Message: "+ message);
+
+  checkMessage(message);
+}
+
+void checkMessage(String msg) {
+  if (msg == "ON") digitalWrite(LED_PIN, HIGH);
+  else if (msg == "OFF") digitalWrite(LED_PIN, LOW);
+  else return;
+
+  String payload = "LED is "+ msg;
+  mqttClient.publish(MQTT_PUB_TOPIC, 0, false, payload.c_str());
 }
 
 void setup() {
   Serial.begin(115200);
+  pinMode(LED_PIN, OUTPUT);
   WiFi.onEvent(WiFiEvent);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
 
@@ -61,9 +69,5 @@ void setup() {
 }
 
 void loop() {
-  static unsigned long lastPublish = 0;
-  if (mqttClient.connected() && millis() - lastPublish > 1000) {
-    lastPublish = millis();
-    mqttClient.publish(MQTT_TOPIC, 0, false, "Hello from ESP32!");  // Publish message to MQTT
-  }
+  // Kosong?
 }
