@@ -6,18 +6,32 @@
 
 // MQTT broker information
 #define MQTT_HOST "broker.hivemq.com"
+// #define MQTT_HOST "test.mosquitto.org"
 #define MQTT_PORT 1883
 #define MQTT_TOPIC "orca/test"
 
 AsyncMqttClient mqttClient;
 
-void onWiFiEvent(WiFiEvent_t event) {
-  if (event == ARDUINO_EVENT_WIFI_STA_GOT_IP) {
-    Serial.print("WiFi connected! Connecting to MQTT... ");
-    mqttClient.connect();  // Connect to MQTT server
-  } else if (event == ARDUINO_EVENT_WIFI_STA_DISCONNECTED) {
-    Serial.println("WiFi lost, reconnecting...");
-    WiFi.begin(WIFI_SSID, WIFI_PASSWORD);  // Reconnect to Wi-Fi
+// void WiFiEvent(WiFiEvent_t event) {
+//   if (event == ARDUINO_EVENT_WIFI_STA_GOT_IP) {
+//     Serial.print("WiFi connected! Connecting to MQTT... ");
+//     mqttClient.connect();  // Connect to MQTT server
+//   } else if (event == ARDUINO_EVENT_WIFI_STA_DISCONNECTED) {
+//     Serial.println("WiFi lost, reconnecting...");
+//     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);  // Reconnect to Wi-Fi
+//   }
+// }
+
+void WiFiEvent(WiFiEvent_t event) {
+  switch(event) {
+    case ARDUINO_EVENT_WIFI_STA_GOT_IP
+      Serial.print("WiFi connected! Connecting to MQTT... ");
+      mqttClient.connect();  // Connect to MQTT server
+      break;
+    case ARDUINO_EVENT_WIFI_STA_DISCONNECTED:
+      Serial.println("WiFi lost, reconnecting...");
+      WiFi.begin(WIFI_SSID, WIFI_PASSWORD);  // Reconnect to Wi-Fi  
+      break;
   }
 }
 
@@ -37,7 +51,7 @@ void onMqttMessage(char* topic, char* payload, AsyncMqttClientMessageProperties 
 
 void setup() {
   Serial.begin(115200);
-  WiFi.onEvent(onWiFiEvent);
+  WiFi.onEvent(WiFiEvent);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
 
   // Setup MQTT Client
