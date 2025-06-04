@@ -54,6 +54,7 @@ void setup() {
   delay(3000);
 
   oled.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+  oled.setRotation(2); // rotate text 180⁰
   oled.setTextSize(1);
   oled.setTextColor(WHITE);
   oled.clearDisplay();

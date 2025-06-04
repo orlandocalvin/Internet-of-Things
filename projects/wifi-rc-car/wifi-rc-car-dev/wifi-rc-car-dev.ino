@@ -97,10 +97,10 @@ void loop() {
     float roll = data["roll"];
     float pitch = data["pitch"];
 
-    if (pitch > 40 && pitch < 100) Forward();
-    else if (pitch < -40 && pitch > -100) Backward();
-    else if (roll > 40 && roll < 100) TurnRight();
-    else if (roll < -40 && roll > -100) TurnLeft();
+    if (pitch > 30 && pitch < 100) Forward();
+    else if (pitch < -30 && pitch > -100) Backward();
+    else if (roll < -30 && roll > -80) TurnRight();
+    else if (roll > 30 && roll < 80) TurnLeft();
     else Stop();
   }
 }
