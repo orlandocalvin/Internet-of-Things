@@ -1,0 +1,109 @@
+:root {
+    --primary: #049faa;
+    --text-dark: #333;
+    --light-bg: #f4f6f8;
+}
+
+html {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: inline-block;
+    text-align: center;
+}
+
+body {
+    margin: 0;
+    background: var(--light-bg);
+}
+
+p {
+    font-size: 1.2rem;
+}
+
+/* Top navigation bar */
+.topnav {
+    background-color: var(--primary);
+    color: white;
+    font-size: 1rem;
+    padding: 10px;
+}
+
+/* Authentication bar */
+#authentication-bar {
+    background-color: mintcream;
+    padding: 10px 0;
+}
+
+#user-details {
+    color: cadetblue;
+}
+
+/* Hide element utility */
+.hidden {
+    display: none;
+}
+
+/* Content wrapper */
+.content {
+    padding: 20px;
+}
+
+/* Sensor cards */
+.cards {
+    max-width: 800px;
+    margin: 0 auto;
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.card {
+    background-color: white;
+    box-shadow: 2px 2px 12px 1px rgba(140, 140, 140, 0.5);
+    padding: 5%;
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+.reading {
+    font-size: 1.4rem;
+}
+
+/* Login form */
+.form-elements-container {
+    padding: 16px;
+    width: 250px;
+    margin: 0 auto;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Buttons */
+button {
+    background-color: var(--primary);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: opacity 0.2s ease;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/* Error text */
+.error-text {
+    color: red;
+}
