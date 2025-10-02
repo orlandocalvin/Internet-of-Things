@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ESP32 Firebase Data Logger</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="topnav">
+        <h1>Sensor Readings App <i class="fas fa-clipboard-list"></i></h1>
+    </div>
+
+    <div id="authentication-bar" style="display: none;">
+        <p>
+            <span id="authentication-status">User logged in</span>
+            <span id="user-details">USEREMAIL</span>
+            <a href="/" id="logout-link">(logout)</a>
+        </p>
+    </div>
+
+    <form id="login-form" style="display: none;">
+        <div class="form-elements-container">
+            <label for="input-email"><b>Email</b></label>
+            <input type="text" placeholder="Enter Username" id="input-email" required>
+
+            <label for="input-password"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" id="input-password" required>
+
+            <button type="submit" id="login-button">Login</button>
+            <p id="error-message" style="color: red;"></p>
+        </div>
+    </form>
+
+    <div class="content-sign-in" id="content-sign-in" style="display: none;">
+        <p><span class="date-time">Last update: <span id="lastUpdate"></span></span></p>
+
+        <div id="cards-div" class="cards">
+            <div class="card">
+                <p><i class="fas fa-thermometer-half" style="color:#059e8a;"></i> TEMPERATURE</p>
+                <p><span class="reading"><span id="temp"></span> &deg;C</span></p>
+            </div>
+            <div class="card">
+                <p><i class="fas fa-tint" style="color:#00add6;"></i> HUMIDITY</p>
+                <p><span class="reading"><span id="hum"></span> &percnt;</span></p>
+            </div>
+            <div class="card">
+                <p><i class="fas fa-angle-double-down" style="color:#e1e437;"></i> PRESSURE</p>
+                <p><span class="reading"><span id="pres"></span> hPa</span></p>
+            </div>
+        </div>
+
+        <p>
+            <button id="view-data-button">View all data</button>
+            <button id="hide-data-button" style="display:none;">Hide data</button>
+            <button id="download-csv-button" style="display:none; background-color: #059e8a;">Download CSV</button>
+            <button id="delete-button" class="deletebtn">Delete data</button>
+        </p>
+
+        <div id="delete-modal" class="modal">
+            <span onclick="document.getElementById('delete-modal').style.display='none'" class="close"
+                title="Close Modal">×</span>
+            <form id="delete-data-form" class="modal-content">
+                <div class="container">
+                    <h1>Delete Data</h1>
+                    <p>Are you sure you want to delete all data from database?</p>
+                    <div class="clearfix">
+                        <button type="button" class="cancelbtn"
+                            onclick="document.getElementById('delete-modal').style.display='none'">Cancel</button>
+                        <button type="submit" class="deletebtn">Delete</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="cards">
+            <div class="card" id="table-container" style="display:none;">
+                <table id="readings-table">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Temp (ºC)</th>
+                            <th>Hum (%)</th>
+                            <th>Pres (hPa)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+                <p><button id="load-data" style="display:none;">More results...</button></p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="scripts/auth.js"></script>
+    <script type="module" src="scripts/index.js"></script>
+</body>
+
+</html>

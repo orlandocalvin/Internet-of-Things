@@ -1,0 +1,186 @@
+html {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    background-color: #f9f9f9;
+}
+
+/* ====== TOP BAR ====== */
+.topnav {
+    background-color: #049faa;
+    color: white;
+    font-size: 1rem;
+    padding: 10px;
+}
+
+/* ====== AUTH BAR ====== */
+#authentication-bar {
+    background-color: mintcream;
+    padding: 10px 0;
+}
+
+#user-details {
+    color: cadetblue;
+}
+
+/* ====== CONTENT ====== */
+.content-sign-in {
+    padding: 20px;
+}
+
+/* ====== CARDS ====== */
+.cards {
+    max-width: 800px;
+    margin: 0 auto 20px;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 2fr));
+}
+
+.card {
+    background-color: #fff;
+    box-shadow: 2px 2px 12px rgba(140, 140, 140, 0.5);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.reading {
+    color: #193036;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* ====== TEXT ====== */
+.date-time {
+    font-size: 0.9rem;
+    color: #1282A2;
+    margin-bottom: 15px;
+}
+
+/* ====== BUTTONS ====== */
+button {
+    background-color: #049faa;
+    color: white;
+    padding: 12px 20px;
+    margin: 8px 5px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    transition: opacity 0.2s ease-in-out;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.deletebtn {
+    background-color: #c52c2c;
+}
+
+.cancelbtn {
+    background-color: #888;
+}
+
+/* ====== FORM ====== */
+.form-elements-container {
+    padding: 16px;
+    width: 250px;
+    margin: 0 auto;
+}
+
+input[type=text],
+input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* ====== TABLE ====== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+th,
+td {
+    padding: 0.5rem;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #e6f4f4;
+}
+
+th {
+    position: sticky;
+    top: 0;
+    background-color: #50b8b4;
+    color: white;
+}
+
+/* ====== MODAL ====== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(71, 78, 93, 0.95);
+    padding-top: 50px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15%;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.close {
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #f1f1f1;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #f44336;
+}
+
+/* ====== CLEARFIX ====== */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* ====== RESPONSIVE ====== */
+@media screen and (max-width: 300px) {
+
+    .cancelbtn,
+    .deletebtn {
+        width: 100%;
+    }
+}
