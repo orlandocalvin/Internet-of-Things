@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hydroponics Control</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div class="topnav">
+        <h1><i class="fas fa-seedling"></i> Hydroponics Control</h1>
+    </div>
+
+    <div id="authentication-bar" style="display: none;">
+        <p><span id="authentication-status">User logged in</span>
+            <span id="user-details">USEREMAIL</span>
+            <a href="/" id="logout-link">(logout)</a>
+        </p>
+    </div>
+    <form id="login-form" style="display: none;">
+        <div class="form-elements-container">
+            <label for="input-email"><b>Email</b></label>
+            <input type="text" placeholder="Enter Username" id="input-email" required>
+            <label for="input-password"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" id="input-password" required>
+            <button type="submit" id="login-button">Login</button>
+            <p id="error-message" style="color:red;"></p>
+        </div>
+    </form>
+    <div class="content-container" id="content-container" style="display: none;">
+
+        <h2><i class="fas fa-tachometer-alt"></i> Sensor Dashboard</h2>
+        <div class="card-grid sensor-grid">
+            <div class="card">
+                <p class="card-title"><i class="fas fa-thermometer-half"></i> Nutrient Temp</p>
+                <p class="sensor-value"><span id="val-nutrient-temp">--</span> &deg;C</p>
+            </div>
+            <div class="card">
+                <p class="card-title"><i class="fas fa-chart-bar"></i> Nutrient Level</p>
+                <p class="sensor-value"><span id="val-nutrient-level">--</span> cm</p>
+            </div>
+            <div class="card">
+                <p class="card-title"><i class="fas fa-wind"></i> Air Temp</p>
+                <p class="sensor-value"><span id="val-air-temp">--</span> &deg;C</p>
+            </div>
+            <div class="card">
+                <p class="card-title"><i class="fas fa-tint"></i> Humidity</p>
+                <p class="sensor-value"><span id="val-humidity">--</span> %</p>
+            </div>
+            <div class="card">
+                <p class="card-title"><i class="fas fa-sun"></i> Light Level</p>
+                <p class="sensor-value"><span id="val-lux">--</span> Lux</p>
+            </div>
+        </div>
+
+        <h2><i class="fas fa-sliders-h"></i> Control Panel</h2>
+        <div class="card-grid control-grid">
+            <div class="card card-wide">
+                <p class="card-title">System Mode</p>
+                <label class="switch">
+                    <input type="checkbox" id="toggle-auto-mode">
+                    <span class="slider"></span>
+                </label>
+                <p class="state">Mode: <span id="state-auto-mode">Loading...</span></p>
+            </div>
+            <div class="card">
+                <p class="card-title"><i class="fas fa-water"></i> Circulation Pump</p>
+                <p>
+                    <button class="button-on" id="btn-pump-on">ON</button>
+                    <button class="button-off" id="btn-pump-off">OFF</button>
+                </p>
+                <p class="state">State: <span id="state-relay1">--</span></p>
+            </div>
+            <div class="card">
+                <p class="card-title"><i class="fas fa-lightbulb"></i> Grow Light</p>
+                <p>
+                    <button class="button-on" id="btn-light-on">ON</button>
+                    <button class="button-off" id="btn-light-off">OFF</button>
+                </p>
+                <p class="state">State: <span id="state-relay2">--</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="scripts/index.js"></script>
+    <script type="module" src="scripts/auth.js"></script>
+</body>
+
+</html>
