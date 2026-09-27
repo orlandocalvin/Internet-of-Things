@@ -1,3 +1,4 @@
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 #include <WiFi.h>
 #include <WiFiMulti.h>
 
@@ -12,9 +13,9 @@ void setup(){
   WiFi.mode(WIFI_STA);
   
   // Add list of wifi networks
-  wifiMulti.addAP("REDACTED", "REDACTED");
-  wifiMulti.addAP("REDACTED", "REDACTED");
-  // wifiMulti.addAP("REDACTED", "REDACTED");
+  wifiMulti.addAP(WIFI_SSID_1, WIFI_PASSWORD_1);
+  wifiMulti.addAP(WIFI_SSID_2, WIFI_PASSWORD_2);
+  // wifiMulti.addAP(WIFI_SSID_3, WIFI_PASSWORD_3);
 
   // WiFi.scanNetworks will return the number of networks found
   int n = WiFi.scanNetworks();

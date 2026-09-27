@@ -1,6 +1,7 @@
 <?php
     $no = 0;
-    $koneksi = mysqli_connect("localhost", "REDACTED", "REDACTED", "REDACTED");
+    require __DIR__ . '/../api/config.php'; // DB credentials (gitignored; see ../api/config.example.php)
+    $koneksi = mysqli_connect($servername, $username, $password, $dbname);
     $query = mysqli_query($koneksi, "SELECT * FROM bendungan ORDER BY id DESC LIMIT 6");
     $result = mysqli_fetch_array($query);
 ?>

@@ -1,5 +1,6 @@
 <?php
-    $koneksi = mysqli_connect("localhost", "REDACTED", "REDACTED", "REDACTED");
+    require __DIR__ . '/../api/config.php'; // DB credentials (gitignored; see ../api/config.example.php)
+    $koneksi = mysqli_connect($servername, $username, $password, $dbname);
     if (!$koneksi) {
         die("Koneksi database gagal: " . mysqli_connect_error());
     }
