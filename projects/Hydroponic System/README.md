@@ -10,7 +10,9 @@ Hydroponic System/
 │   ├── include/                        # Header files
 │   ├── lib/                            # Library internal
 │   ├── src/
-│   │   └── main.cpp                    # Kode utama (sensors, relay, Firebase)
+│   │   ├── main.cpp                    # Kode utama (sensors, relay, Firebase)
+│   │   ├── secrets.example.h           # Contoh kredensial (salin ke secrets.h)
+│   │   └── secrets.h                   # Kredensial asli (tidak di-commit)
 │   ├── test/                           # Unit test
 │   ├── .vscode/                        # Konfigurasi VS Code (PlatformIO)
 │   ├── platformio.ini                  # Konfigurasi PlatformIO
@@ -39,6 +41,8 @@ Hydroponic System/
 
 ## Cara Menjalankan
 ### Firmware ESP32
+Salin `src/secrets.example.h` menjadi `src/secrets.h`, lalu isi SSID/password Wi-Fi serta API key, URL database, email dan password Firebase milikmu.
+
 ```bash
 cd esp32
 pio run            # Build
@@ -53,4 +57,4 @@ firebase deploy
 ```
 
 ## Catatan Keamanan
-⚠ File `src/main.cpp` berisi kredensial Firebase bawaan (API Key, email, password) dan SSID Wi-Fi. Sebaiknya dipindahkan ke file konfigurasi terpisah (`.env` / `config.h`) yang tidak di-commit ke repository publik.
+Kredensial Wi-Fi dan Firebase tidak ada di kode. Firmware membacanya dari `src/secrets.h`, yang diabaikan git (`.gitignore`); yang di-commit hanya `src/secrets.example.h`. Konfigurasi Firebase di `web_app/public` memang dirancang publik, jadi keamanan data diatur lewat `database.rules.json`.
