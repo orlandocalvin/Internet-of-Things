@@ -3,3 +3,8 @@
 # Copy the matching *.example.* file and fill it in.
 secrets.h
 config.php
+
+# Build output (firmware binaries embed the credentials from secrets.h)
+build/
+.pio/
+*.littlefs.bin
