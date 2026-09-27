@@ -10,13 +10,8 @@
 #include <Adafruit_INA219.h>
 
 // Wi-Fi & Firebase Credentials
-#define WIFI_SSID "REDACTED"
-#define WIFI_PASSWORD "REDACTED"
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 
-#define API_KEY "REDACTED"
-#define DATABASE_URL "REDACTED"
-#define USER_EMAIL "REDACTED"
-#define USER_PASS "REDACTED"
 
 // === RPM dari Hall A3144 ===
 #define HALL_PIN 4

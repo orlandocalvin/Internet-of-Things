@@ -2,8 +2,7 @@
 #include <ESPAsyncWebServer.h>
 #include <SPIFFS.h>
 
-const char* ssid = "REDACTED";
-const char* password = "REDACTED";
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 
 // membuat static IP Address
 IPAddress staticIP(192,168,1,2);

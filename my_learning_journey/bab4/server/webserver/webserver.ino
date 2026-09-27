@@ -1,8 +1,7 @@
 #include <WiFi.h>
 #include <WebServer.h>
 
-const char* ssid = "REDACTED";
-const char* password = "REDACTED";
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 
 const int led = 2;
 

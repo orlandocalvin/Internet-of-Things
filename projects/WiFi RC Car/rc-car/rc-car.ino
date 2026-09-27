@@ -15,8 +15,7 @@ String command;
 AsyncWebServer server(80);
 
 // set AP variable
-const char* ssid = "REDACTED";
-const char* password = "REDACTED";
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 const int channel = 6, max_connections = 2;
 bool hidden = false;
 

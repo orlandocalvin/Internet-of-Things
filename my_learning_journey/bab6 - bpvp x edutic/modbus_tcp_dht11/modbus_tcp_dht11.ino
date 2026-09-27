@@ -12,8 +12,7 @@
 #define RELAY1_Coil 102
 #define RELAY2_Coil 103
 
-const char* ssid = "REDACTED";
-const char* pass = "REDACTED";
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 
 DHT dht(DHTPIN, DHTTYPE);
 ModbusIP mb;

@@ -16,8 +16,7 @@
 #define MODBUS_QUANTITY 2      // Number of registers to fetch
 
 // WiFi and MQTT configuration
-const char* ssid = "REDACTED";
-const char* password = "REDACTED";
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 const char* mqtt_server = "broker.emqx.io";
 #define PUBLISH_TOPIC "orca/xy-md02"
 

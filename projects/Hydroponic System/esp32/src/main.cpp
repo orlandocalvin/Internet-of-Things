@@ -40,16 +40,11 @@ constexpr unsigned long MINUTES(unsigned long m)
 }
 
 // WiFi Credentials
-#define WIFI_SSID "REDACTED"
-#define WIFI_PASSWORD "REDACTED"
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 constexpr unsigned long INITIALIZE_INTERVAL = SECONDS(2);
 constexpr unsigned long WIFI_CONNECT_TIMEOUT = SECONDS(10);
 
 // Firebase Configuration
-#define Web_API_KEY "REDACTED"
-#define DATABASE_URL "REDACTED"
-#define USER_EMAIL "REDACTED"
-#define USER_PASS "REDACTED"
 
 // Pin definitions
 constexpr int PIN_DS18B20 = 23;

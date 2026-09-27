@@ -3,8 +3,7 @@
 #include <HCSR04.h>
 
 HCSR04 hc(2,4); // pin 2 trigger, pin 4 echo
-const char *ssid = "REDACTED";  //Nama Wifi
-const char *password = "REDACTED"; // pass wifi
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 
 void setup() {
   delay(1000);

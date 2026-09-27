@@ -4,8 +4,7 @@
 #include <ESP32Servo.h>
 #include <HTTPClient.h>
 
-const char *ssid = "REDACTED";
-const char *password = "REDACTED";
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 
 dht DHT11;
 Servo servo1;

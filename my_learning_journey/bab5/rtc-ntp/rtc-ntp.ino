@@ -6,8 +6,7 @@
 RTC_DS3231 rtc;
 
 // === WIFI CONFIG ===
-const char* WIFI_SSID     = "REDACTED";
-const char* WIFI_PASSWORD = "REDACTED";
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 
 // === NTP CONFIG ===
 const char* NTP_SERVER    = "pool.ntp.org";

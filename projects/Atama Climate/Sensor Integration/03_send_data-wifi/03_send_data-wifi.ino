@@ -9,8 +9,7 @@
 #include <HTTPClient.h>
 
 // Network config
-const char* WIFI_SSID = "REDACTED";
-const char* WIFI_PASSWORD = "REDACTED";
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 const char* SERVER_URL = "https://www.atamagri.app/api/iot/sensor-data";
 const String DEVICE_ID = "ESP32-001";
 

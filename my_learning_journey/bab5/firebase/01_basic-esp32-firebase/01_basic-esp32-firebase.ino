@@ -3,14 +3,9 @@
 #include <FirebaseClient.h>
 
 // WiFi credentials
-const char* ssid = "REDACTED";
-const char* password = "REDACTED";
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 
 // Firebase credentials
-#define API_KEY "REDACTED"
-#define DATABASE_URL "REDACTED"
-#define USER_EMAIL "REDACTED"
-#define USER_PASS "REDACTED"
 
 // Firebase objects
 FirebaseApp app;

@@ -1,7 +1,6 @@
 #include <WiFi.h>
 
-const char* ssid = "REDACTED";
-const char* password = "REDACTED";
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 
 void setup() {
     Serial.begin(115200);

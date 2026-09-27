@@ -20,8 +20,7 @@
 #define HUMIDITY_ADDRESS    101
 
 // === Wi-Fi Credentials ===
-const char* WIFI_SSID = "REDACTED";
-const char* WIFI_PASS = "REDACTED";
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 
 // === Touch Handling ===
 const uint16_t TOUCH_THRESHOLD = 800;  // pressed if touchRead() < this

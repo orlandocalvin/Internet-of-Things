@@ -3,8 +3,7 @@
 #include <ArduinoJson.h>
 #include <DHT.h>
  
-const char* ssid = "REDACTED";
-const char* password = "REDACTED";
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 
 float temperature;
 float humidity;

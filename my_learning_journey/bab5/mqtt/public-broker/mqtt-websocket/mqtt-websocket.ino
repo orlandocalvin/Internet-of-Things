@@ -2,8 +2,7 @@
 #include <AsyncMqttClient.h>
 
 #define LED_PIN 4
-#define WIFI_SSID "REDACTED"
-#define WIFI_PASSWORD "REDACTED"
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 
 // MQTT broker information
 #define MQTT_HOST "broker.hivemq.com"

@@ -5,8 +5,7 @@
 const int LED_PIN = 4;
 String inputCommand = "";
 
-const char *ssid = "REDACTED";
-const char *password = "REDACTED";
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 
 IPAddress local_IP(192, 168, 137, 100);
 IPAddress gateway(192, 168, 137, 1);

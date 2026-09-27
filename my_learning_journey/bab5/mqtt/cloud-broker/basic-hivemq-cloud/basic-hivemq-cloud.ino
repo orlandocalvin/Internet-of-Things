@@ -2,14 +2,11 @@
 #include <WiFiClientSecure.h>
 #include <PubSubClient.h>
 
-#define WIFI_SSID "REDACTED"
-#define WIFI_PASSWORD "REDACTED"
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 
 #define MQTT_HOST "728895e7c26149d4981edb8564e5e159.s1.eu.hivemq.cloud"
 #define MQTT_PORT 8883
 
-#define MQTT_USERNAME "REDACTED"
-#define MQTT_PASSWORD "REDACTED"
 
 WiFiClientSecure net;
 PubSubClient mqttClient(net);

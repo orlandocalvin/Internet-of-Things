@@ -11,8 +11,7 @@
 #define SAMPLE_COUNT 10
 #define RECEIVER_PORT 1234
 #define RECEIVER_IP "192.168.4.1"
-const char* SSID = "REDACTED";
-#define PASSWORD "REDACTED"
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 
 Adafruit_MPU6050 mpu;
 Adafruit_SSD1306 oled(OLED_WIDTH, OLED_HEIGHT, &Wire, -1);

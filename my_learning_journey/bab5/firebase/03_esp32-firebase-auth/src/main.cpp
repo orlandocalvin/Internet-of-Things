@@ -7,13 +7,9 @@
 #include "ExampleFunctions.h" // utility functions
 
 // WiFi credentials
-#define WIFI_SSID "REDACTED"
-#define WIFI_PASSWORD "REDACTED"
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 
 // Firebase credentials
-#define API_KEY "REDACTED"
-#define USER_EMAIL "REDACTED"
-#define USER_PASS "REDACTED"
 
 // Firebase objects
 FirebaseApp app;

@@ -4,8 +4,7 @@
 #include <ModbusMaster.h>
 
 // ===== WiFi / MQTT =====
-const char* ssid = "REDACTED";
-const char* password = "REDACTED";
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 const char* mqtt_server = "broker.emqx.io";
 
 const char* TOPIC_RELAY = "kelompok1/relay";

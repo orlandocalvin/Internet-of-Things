@@ -4,11 +4,8 @@
 #include <ArduinoJson.h>
 
 // Initialize Telegram BOT
-#define BOTtoken "REDACTED"
-#define CHAT_ID "REDACTED"
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 
-const char* ssid = "REDACTED";
-const char* password = "REDACTED";
 
 WiFiClientSecure client;
 UniversalTelegramBot bot(BOTtoken, client);

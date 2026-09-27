@@ -3,8 +3,7 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
-const char* ssid = "REDACTED";  // Nama Wi-Fi drone
-const char* password = "REDACTED";
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 
 WiFiUDP udp;
 const char* TELLO_IP = "192.168.10.1";

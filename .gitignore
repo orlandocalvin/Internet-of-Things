@@ -1,0 +1,5 @@
+
+# Credentials: each sketch/app keeps its real values in these files, never in git.
+# Copy the matching *.example.* file and fill it in.
+secrets.h
+config.php

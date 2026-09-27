@@ -6,8 +6,7 @@
 #include <ElegantOTA.h>
 
 // Replace with your network credentials
-const char* ssid = "REDACTED";
-const char* password = "REDACTED";
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 
 // Create AsyncWebServer object on port 80
 AsyncWebServer server(80);

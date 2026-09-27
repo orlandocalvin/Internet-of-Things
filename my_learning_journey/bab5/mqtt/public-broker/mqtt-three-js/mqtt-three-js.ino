@@ -5,8 +5,7 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_MPU6050.h>
 
-#define WIFI_SSID "REDACTED"
-#define WIFI_PASSWORD "REDACTED"
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 
 // MQTT broker information
 #define MQTT_HOST "broker.hivemq.com"

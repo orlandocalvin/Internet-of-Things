@@ -3,8 +3,7 @@
 #include <ArduinoJson.h>
 
 // WiFi credentials
-const char* ssid = "REDACTED";
-const char* password = "REDACTED";
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 
 // API endpoint
 const char* serverURL = "https://www.atamagri.app/api/iot/sensor-data";

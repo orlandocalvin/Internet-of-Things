@@ -5,8 +5,7 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_SSD1306.h>
 
-const char* ssid = "REDACTED";
-const char* password = "REDACTED";
+#include "secrets.h"  // credentials (gitignored; see secrets.example.h)
 
 const int btnLanding = 9;  // Button to toggle takeoff/landing
 bool droneFly = false;  // Track if the drone is flying
